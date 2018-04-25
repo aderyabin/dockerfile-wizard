@@ -88,6 +88,13 @@ if [ $HEROKU_CLI = "true" ] ; then
     echo "RUN curl https://cli-assets.heroku.com/install-ubuntu.sh | sh"
 fi
 
+if [ $YARN = "true" ] ; then
+    echo "RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -"
+    echo "RUN echo \"deb https://dl.yarnpkg.com/debian/ stable main\" | tee /etc/apt/sources.list.d/yarn.list"
+    echo "RUN apt-get -y install apt-transport-https "
+    echo "RUN apt-get update && apt-get -y install yarn"
+fi
+
 # install bats for testing
 echo "RUN git clone https://github.com/sstephenson/bats.git \
   && cd bats \

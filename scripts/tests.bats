@@ -79,6 +79,14 @@
   heroku --version
 }
 
+@test "yarn" {
+  if [ $YARN != "true" ] ; then
+    skip "yarn not installed"
+  fi
+
+  yarn --version
+}
+
 @test "phantomjs" {
   if [ $BROWSERS != "true" ] ; then
     skip "no browser tools installed"

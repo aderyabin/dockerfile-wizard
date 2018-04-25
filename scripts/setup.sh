@@ -144,6 +144,20 @@ read -r -p "
 Does your project need web browsers for browser testing? Enter the word 'yes' to install browsers/tools (Xvfb, PhantomJS, Firefox, Chrome, Chromedriver) or hit enter to skip
 : " BROWSERS
 
+read -r -p "
+Does your project need Yarn? Enter the word 'yes' to install Yarn or hit enter to skip installing Yarn
+: " YARN
+
+case "$YARN" in
+  yes)
+    perl -i -pe 's/# Yarn options: true, false/true/' .circleci/config.yml
+    ;;
+  *)
+    perl -i -pe 's/# Yarn options: true, false/false/' .circleci/config.yml
+    perl -i -pe "s/- run: yarn/# - run: yarn/" .circleci/config.yml
+    ;;
+esac
+
 case "$BROWSERS" in
   yes)
     perl -i -pe 's/# browser tools \(Xvfb, PhantomJS, Firefox, Chrome, Chromedriver\): true, false/true/' .circleci/config.yml
