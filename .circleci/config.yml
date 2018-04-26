@@ -49,16 +49,16 @@ jobs:
 
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-      - run: docker build -t $DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG .
+      - run: docker build -t netsoftholdings/$IMAGE_NAME:$IMAGE_TAG .
 
-      - run: docker push $DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG && sleep 10
+      - run: docker push netsoftholdings/$IMAGE_NAME:$IMAGE_TAG && sleep 10
 
       - store_artifacts:
           path: Dockerfile
 
   test_image:
     docker:
-      - image: $DOCKER_USERNAME/hubstaff-core:ruby2.2.5-node6.14.1-jessie
+      - image: netsoftholdings/hubstaff-core:ruby2.2.5-node6.14.1-jessie
         environment:
           <<: *image_config
 
